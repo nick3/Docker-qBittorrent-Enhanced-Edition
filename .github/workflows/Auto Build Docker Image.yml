@@ -24,14 +24,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # 获得仓库中的ReleaseTag
+      # 获得仓库中的 ReleaseTag
       - name: Set Version
         id: set-version
         run: |
           echo "::set-output name=version::$(cat ReleaseTag | head -n1)"
           echo "ReleaseTag=$(cat ReleaseTag | head -n1)"
 
-      # 缓存release tag，用作与下一次执行任务时获取到到release tag做对比
+      # 缓存 release tag，用作与下一次执行任务时获取到到 release tag 做对比
       - name: Cache tag
         id: cache-tag
         uses: actions/cache@v2
@@ -39,7 +39,7 @@ jobs:
           path: ./tag/
           key: ${{ runner.os }}-tag-v${{ steps.set-version.outputs.version }}
 
-      # 获取将latest release tag，未命中缓存则更新ReleaseTag
+      # 获取将 latest release tag，未命中缓存则更新 ReleaseTag
       - name: Get latest release tag
         id: get-release-tag
         if: steps.cache-tag.outputs.cache-hit != 'true'
@@ -57,5 +57,5 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            superng6/qbittorrentee:${{ steps.set-version.outputs.version }}
-            superng6/qbittorrentee:latest
+            nick3/qbittorrentee:${{ steps.set-version.outputs.version }}
+            nick3/qbittorrentee:latest
