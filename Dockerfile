@@ -12,7 +12,7 @@ RUN cd /qbittorrent \
 	&& chmod a+x install.sh \
 	&& bash install.sh
 
-FROM golang:1.23 AS gobuilder
+FROM golang:1.23-alpine AS gobuilder
 
 RUN apk add --no-cache ca-certificates make git && \
     apk add --no-cache tzdata
