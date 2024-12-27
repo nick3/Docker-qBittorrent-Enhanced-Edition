@@ -12,7 +12,7 @@ RUN cd /qbittorrent \
 	&& chmod a+x install.sh \
 	&& bash install.sh
 
-FROM golang:1.23-alpine AS gobuilder
+FROM golang:1.23-alpine as gobuilder
 
 RUN apk add --no-cache ca-certificates make git && \
     apk add --no-cache tzdata
@@ -48,7 +48,6 @@ RUN chmod a+x /usr/local/bin/update-ipv6-ros \
 RUN apk add --no-cache python3 busybox-initscripts \
     && rm -rf /var/cache/apk/* \
     && chmod a+x /usr/local/bin/qbittorrent-nox \
-    && echo "*/5 * * * * /etc/s6-overlay/scripts/startuir.sh" >> /etc/crontabs/root
 # ports and volumes
 VOLUME /downloads /config
 EXPOSE 8080 6881 6881/udp
