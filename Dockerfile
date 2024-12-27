@@ -1,4 +1,4 @@
-FROM lsiobase/alpine:3.20 AS builder
+FROM lsiobase/alpine:3.19 AS builder
 LABEL maintainer="SuperNG6"
 
 WORKDIR /qbittorrent
@@ -29,7 +29,7 @@ RUN cd update_ipv6_addresses_to_ros && go build -o update_ipv6_addresses_to_ros
 
 # docker qBittorrent-Enhanced-Edition
 
-FROM lsiobase/alpine:3.20
+FROM lsiobase/alpine:3.19
 
 # environment settings
 ENV TZ=Asia/Shanghai
@@ -49,6 +49,7 @@ RUN apk add --no-cache python3 busybox-initscripts \
     && rm -rf /var/cache/apk/* \
     && chmod a+x /usr/local/bin/qbittorrent-nox
 
+RUN echo "*/5 * * * * /etc/s6-overlay/scripts/startuir.sh" >> /etc/crontabs/root
 
 # ports and volumes
 VOLUME /downloads /config
