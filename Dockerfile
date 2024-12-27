@@ -1,4 +1,4 @@
-FROM lsiobase/alpine:3.20 as builder
+FROM lsiobase/alpine:3.20 AS builder
 LABEL maintainer="SuperNG6"
 
 WORKDIR /qbittorrent
@@ -12,7 +12,7 @@ RUN cd /qbittorrent \
 	&& chmod a+x install.sh \
 	&& bash install.sh
 
-FROM golang:1.23-alpine as gobuilder
+FROM golang:1.23-alpine AS gobuilder
 
 RUN apk add --no-cache ca-certificates make git && \
     apk add --no-cache tzdata
@@ -48,6 +48,8 @@ RUN chmod a+x /usr/local/bin/update-ipv6-ros \
 RUN apk add --no-cache python3 busybox-initscripts \
     && rm -rf /var/cache/apk/* \
     && chmod a+x /usr/local/bin/qbittorrent-nox
+
+
 # ports and volumes
 VOLUME /downloads /config
 EXPOSE 8080 6881 6881/udp
