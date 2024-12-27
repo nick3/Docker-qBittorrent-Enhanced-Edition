@@ -47,7 +47,7 @@ RUN chmod a+x /usr/local/bin/update-ipv6-ros \
 # install python3 and cron
 RUN apk add --no-cache python3 busybox-initscripts \
     && rm -rf /var/cache/apk/* \
-    && chmod a+x /usr/local/bin/qbittorrent-nox \
+    && chmod a+x /usr/local/bin/qbittorrent-nox
 # ports and volumes
 VOLUME /downloads /config
 EXPOSE 8080 6881 6881/udp
