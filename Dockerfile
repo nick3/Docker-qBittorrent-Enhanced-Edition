@@ -42,12 +42,15 @@ COPY --from=gobuilder /build/update_ipv6_addresses_to_ros/update_ipv6_addresses_
 
 RUN chmod a+x /usr/local/bin/update-ipv6-ros \
     && chmod a+x /etc/s6-overlay/s6-rc.d/crond/run \
-    && chmod a+x /etc/s6-overlay/scripts/startuir.sh
+    && chmod a+x /etc/s6-overlay/scripts/startuir.sh \
+    && chmod a+x /etc/s6-overlay/scripts/setup_ipv6_route.sh
 
 # install python3 and cron
 RUN apk add --no-cache python3 \
     && rm -rf /var/cache/apk/* \
     && chmod a+x /usr/local/bin/qbittorrent-nox
+
+RUN /etc/s6-overlay/scripts/setup_ipv6_route.sh
 
 RUN echo "*/5 * * * * /etc/s6-overlay/scripts/startuir.sh" >> /etc/crontabs/root
 
