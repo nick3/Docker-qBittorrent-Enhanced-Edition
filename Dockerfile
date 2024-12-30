@@ -50,8 +50,6 @@ RUN apk add --no-cache python3 \
     && rm -rf /var/cache/apk/* \
     && chmod a+x /usr/local/bin/qbittorrent-nox
 
-RUN /etc/s6-overlay/scripts/setup_ipv6_route.sh
-
 RUN echo "*/5 * * * * /etc/s6-overlay/scripts/startuir.sh" >> /etc/crontabs/root
 
 # ports and volumes
